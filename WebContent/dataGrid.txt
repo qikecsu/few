@@ -1,0 +1,13 @@
+{  
+identifier: 'emp_no',  
+label: 'emp_no',  
+items: [  
+     {emp_no:'2100', name:'Matt', gender:'M', dept_no:730,bonus:647}, 
+     {emp_no:'2200', name:'Lisa', gender:'F', dept_no:731, bonus:608},  
+     {emp_no:'2300', name:'Mick', gender:'M', dept_no:732, bonus:532},  
+     {emp_no:'2400', name:'John', gender:'M', dept_no:733, bonus:1840},  
+     {emp_no:'2500', name:'Jan', gender:'M', dept_no:734,bonus:1040},  
+     {emp_no:'2101', name:'Jeff', gender:'M', dept_no:730, bonus:647},   
+     {emp_no:'2202', name:'Frank', gender:'M',dept_no:731, bonus:608},  
+     {emp_no:'2303', name:'Fred', gender:'M', dept_no:732, bonus:532}  
+ ]}
