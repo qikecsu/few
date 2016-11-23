@@ -1,0 +1,282 @@
+@CHARSET "UTF-8";
+ 
+ body, html { width:100%; height:99.9%; margin:0; padding:0 } 
+ #borderContainer { width:100%; height:100%;}
+ 
+a:link {
+	text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+}
+
+#header_bar { background:#21695A; border: 1px; }
+
+#logo{
+	background-image:url('../images/logo.jpg');
+	background-repeat:no-repeat;#009100
+	height:30px;
+	padding:50px 0px 0px 90px;
+	font:bold 14px/20px 宋体, arial,sans-serif;
+	color:#0A64B4;
+}
+
+#prj_title{
+	font:bold 16px 宋体, arial,sans-serif;
+	color:#ffffff;
+	text-align:center;
+	padding:2px 0px 0px 0px ;
+}
+
+#menu_bar{
+	width:590px; 
+	height:30px; 
+	background:#007A77; 
+	margin:0px  auto;
+	padding:0px 0px 0px 35px;
+	color:#FFFFFF;
+	font:16px/30px 宋体, arial,sans-serif;
+}
+
+/* menu */
+
+#header_menu {
+	clear: both;
+	width: 720px;
+	height: 42px;
+	background: url(../images/templamtemo_menu.png);
+	margin:0px  auto;
+}
+
+#header_menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#header_menu ul li {
+	padding: 0;
+	margin: 0;
+	display: inline;
+}
+
+#header_menu ul li a {
+	float: left;
+	display: block;
+	width: 75px;
+	height: 23px;
+	padding: 10px 0 0 0;
+	font-size: 14px;
+	color: #67acc2;	
+	text-shadow: 1px 1px 1px #fff;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 700;
+	outline: none;
+	border: none;
+	letter-spacing: 1px;
+	background: url(../images/templatmeo_menu_divider.png) right repeat-y;
+}
+
+#header_menu ul li a:hover, #header_menu ul .current {
+	color: #666;
+	text-shadow: 1px 1px 1px #fff
+}
+
+#header_menu ul .last { background: none }
+
+/* end of menu */
+
+/* FOOTER */
+#footer {
+	height:14px;
+	color:#fff;
+	background:#21695A; 
+	font:8px/10px 宋体, arial,sans-serif;
+	width:100%;
+	margin:0 auto;
+	text-align: center;
+	padding:2px 0px 0px 0px;
+}
+
+/* menu */
+
+#footer_menu {
+	clear: both;
+	width: 720px;
+	height: 21px;
+	margin:0px  auto;
+}
+
+#footer_menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#footer_menu ul li {
+	padding: 0;
+	margin: 0;
+	display: inline;
+}
+
+#footer_menu ul li a {
+	float: left;
+	display: block;
+	width: 75px;
+	height: 21px;
+	padding: 0px 0 0 0;
+	color: #AAA;	
+	text-shadow: 1px 1px 1px #fff;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	letter-spacing: 1px;
+	
+}
+
+#footer_menu ul li a:hover, #footer_menu ul .current {
+	color: #666;
+	text-shadow: 1px 1px 1px #fff
+}
+
+#footer_menu ul .last { background: none }
+
+/* end of menu */
+
+.dojoxGrid th, tr {
+   font-size: 12px;
+}
+
+.label1 {
+	font-size: 13px;
+}
+
+.div-label{ float:left;width:180px;border:0px solid #F00;text-align:right;} 
+.div-normal{ float:left;width:180px;border:0px solid #000;background:#f00;text-align:center;} 
+.div-abnormal{ float:left;width:100px;border:0px solid #000;background:#0f0;text-align:center;margin-right:100px;} 
+.div-fault{ float:left;width:100px;border:0px solid #000;background:#ff0;text-align:center;margin-right:100px; } 
+
+
+/* icons */
+
+.buttonEditorIconNew {
+	background-image: url("../images/add_16.png"); 
+	background-repeat: no-repeat;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+}
+
+.status_on {
+    background-image:url(../images/OK_16.png) !important;
+    background-repeat: no-repeat;
+	width: 100px;
+	height: 18px;
+	margin-left: 15px;
+	text-align: center;
+}
+
+.status_off {
+    background-image:url(../images/delete_16.png) !important;
+    background-repeat: no-repeat;
+	width: 100px;
+	height: 18px;
+	margin-left: 15px;
+	text-align: center;
+}
+
+.device-control-start {
+    background-image:url(../images/Start_16.png) !important;
+    background-repeat: no-repeat;
+	width: 60px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.device-control-stop {
+    background-image:url(../images/Stop_16.png) !important;
+    background-repeat: no-repeat;
+	width: 60px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.device-fire-clean {
+    background-image:url(../images/clear_16.png) !important;
+    background-repeat: no-repeat;
+	width: 100px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.company-update {
+    background-image:url(../images/refresh_16.png) !important;
+    background-repeat: no-repeat;
+	width: 60px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.company-delete {
+    background-image:url(../images/delete_16.png) !important;
+    background-repeat: no-repeat;
+	width: 60px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.device-eye {
+    background-image:url(../images/eye_16.png) !important;
+    background-repeat: no-repeat;
+	width: 85px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.device-infra-red {
+    background-image:url(../images/infra-red_16.png) !important;
+    background-repeat: no-repeat;
+	width: 85px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.device-photo {
+    background-image:url(../images/photo_16.png) !important;
+    background-repeat: no-repeat;
+	width: 85px;
+	height: 18px;
+	float:left;
+	margin-left: 5px;
+	text-align: center;
+}
+
+
+/* button   */
+
+.claro .fireButton.dijitButton .dijitButtonNode    //claro 界面template
+{
+    width:88px;
+}

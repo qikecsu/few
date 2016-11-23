@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+<!--
+@import "dojo/dojo/resources/dojo.css";
+@import "dojo/dijit/themes/claro/claro.css";
+@import "dojo/dijit/themes/claro/document.css";
+@import "dojo/dojox/grid/enhanced/resources/claro/EnhancedGrid.css";
+@import "dojo/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css";
+
+#gridContainer {
+    width: 90%;
+    height: 0px;
+}
+/*Grid needs an explicit height by default*/
+#grid {
+	height: 340px;
+	width: 96%;
+	border: solid 1px;
+}
+
+-->
+</style>
+<title>Administrator console</title>
+
+<!-- load dojo and provide config via data attribute -->
+<script src="dojo/dojo/dojo.js">	
+</script>
+
+<script>
+ require(['dojo/_base/array', 'dojo/_base/lang', 'dojo/_base/event', 'dojo/on', 'dojox/grid/EnhancedGrid', 'dojo/data/ItemFileWriteStore', 'dijit/form/Button', 'dojo/dom', 'dojo/parser', "dojo/fx/Toggler", 'dojo/domReady!'],
+  function(array, lang, event, on, EnhancedGrid, ItemFileWriteStore, Button, dom, parser){
+    parser.parse();
+/*    
+    var toggler = new Toggler({
+	    node: "basicNode"
+	  });
+	
+	toggler.hide();*/
+/*	
+	var toggler = new Toggler({
+	    node: "basicNode"
+	  });
+	  on(dom.byId("hideButton"), "click", function(e){
+	    toggler.hide();
+	  });
+	  on(dom.byId("showButton"), "click", function(e){
+	    toggler.show();
+	  });*/
+
+	var formatHref = function(value,rowIndex) {
+		protocol = window.location.protocol;
+		hostname = window.location.hostname;
+		var link=protocol+"//"+hostname+"/communities/service/html/communityview?communityUuid="+value+"#fullpageWidgetId=Members";		
+		return "<a href='"+link+"' target='_blank' >View members</a>";
+	} 
+    /*set up data store*/
+    var data = {
+              identifier: "id",
+      items: []
+    };
+    var data_list = [
+      { agentTeam: 'false', forum: 'But are not followed by two hexadecimal', forumType: '29.91'},
+      {  agentTeam: false, forum: 'Because a % sign always indicates', forumType: 9.33},
+      { agentTeam: false, forum: 'Signs can be selectively', forumType: 19.34}
+    ];
+    var rows = 5;
+    for(i = 0, l = data_list.length; i < rows; i++){
+      data.items.push(lang.mixin({ id: i+1 }, data_list[i%l]));
+    }
+    store = new ItemFileWriteStore({
+		url: "/MyProject/getAllMaintain"
+		//data: data
+	});
+	var droppingStore={
+		"items":[
+			{"code":"1","name":"Awards"},
+			{"code":"2","name":"Program"},
+			{"code":"3","name":"FAQ"},
+			{"code":"4","name":"HelpDesk"},
+			{"code":"5","name":"Best Practices"}
+		],        
+		"identifier":"code",
+		"label":"name"
+	} ;
+	
+	var formatForumType=function(inDatum, inRowIndex){
+            for(var key in droppingStore.items){
+                  var item = droppingStore.items[key];						
+                  if(item.code == inDatum) {						
+                      return item.name;
+                  }
+            }
+    };
+    /*set up layout*/
+    var layout = [[
+      {'name': 'Id', 'field': 'id', 'width': '3%', editable: true},
+      {'name': 'Agent Team', 'field': 'agentTeam', 'width': '8%', editable: true},
+	  {'name': 'Community UUid', 'field': 'communityUuid', 'width': '17%', editable: true},
+	  {'name': 'View members', 'field': 'communityUuid', 'width': '10%', formatter: formatHref},
+      {'name': 'Forum name', 'field': 'forum', 'width': '10%', editable: true},
+      {'name': 'Forum Type', 'field': 'forumType', 'width': '6%', editable: true, type: dojox.grid.cells.Select, options:["Awards","Program","FAQ","HelpDesk","Best Practices"], values: [ '1', '2','3','4','5' ],formatter: formatForumType},	  
+	  {'name': 'URL', 'field': 'url', 'width': 'auto', editable: true}
+    ]];
+
+    /*create a new grid*/
+    grid = new EnhancedGrid({
+        id: 'grid',
+        store: store,
+        structure: layout,
+        rowSelector: '20px'});
+
+    /*append the new grid to the div*/
+    grid.placeAt("gridDiv");
+	
+	dojo.connect(store, "onNew", this,onNew);
+	dojo.connect(store, "onSet", this,onSet);
+	dojo.connect(store, "onDelete", this,onDelete);
+    /* attach an event handler */
+    on(button2,'click',
+    function(e){
+        /* set the properties for the new item: */
+        var myNewItem = {id: '', agentTeam: 'new',communityUuid:'new',forum: 'new', url: 'new', forumType: 0};
+        /* Insert the new item into the store:*/
+        store.newItem(myNewItem);
+    }
+    );
+    /* attach an event handler */
+    on(button1,'click',
+    function(e){
+		/* Get all selected items from the Grid: */
+        var items = grid.selection.getSelected();		
+        if(items.length){
+			if(!confirm("Are you sure to delete?")){
+				return false;		
+			}
+            /* Iterate through the list of selected items.
+               The current item is available in the variable
+               "selectedItem" within the following function: */
+            array.forEach(items, function(selectedItem){
+                if(selectedItem !== null){
+                    /* Delete the item from the data store: */
+                    store.deleteItem(selectedItem);
+                } /* end if */
+            }); /* end forEach */
+        }else{
+			alert("Please select row(s)");
+		}
+		
+        event.stop(e);
+    }
+    );
+
+    /*Call startup() to render the grid*/
+    grid.startup();
+});
+ function onNew(item) {
+ //save it to the database	
+	var agentTeam=item.agentTeam;
+	var communityUuid=item.communityUuid;
+	var forum=item.forum;
+	var url=item.url;
+	var forumType=item.forumType;	
+	dojo.xhrPost({
+			 //The URL of the request
+		    url: "/MyProject/add",
+		    //handled data format
+		    handleAs: "json",
+		    //request param
+		    content: {				
+				agentTeam: agentTeam,
+				communityUuid: communityUuid,	
+				forum: forum,				
+				url: url,
+				forumType: forumType
+			},		    
+		    // The error handler
+		    error: function(error, ioArgs) {
+		        alert(error.message);
+		    }
+	});	
+	//refresh page;
+	setTimeout(function() {window.location.reload();},2000);
+}
+function onSet(item, attribute, oldValue, newValue) {
+	var id=item.id;
+	var agentTeam=item.agentTeam;
+	var communityUuid=item.communityUuid;
+	var forum=item.forum;
+	var url=item.url;
+	var forumType=item.forumType;
+	if(oldValue!=newValue){
+		//save the new value to the database
+		dojo.xhrPost({
+			 //The URL of the request
+		    url: "/MyProject/update",
+		    //handled data format
+		    handleAs: "json",
+		    //request param
+		    content: {
+				id: id,
+				agentTeam: agentTeam,
+				communityUuid: communityUuid,
+				forum: forum,				
+				url: url,
+				forumType: forumType
+			},		    
+		    // The error handler
+		    error: function(error, ioArgs) {
+		        alert(error.message);
+		    }
+		});
+	}					
+}
+function onDelete(item){
+	//delete the item from the database.
+	var id=item.id;
+	dojo.xhrPost({
+			 //The URL of the request
+		    url: "/MyProject/delete",
+		    //handled data format
+		    handleAs: "json",
+		    //request param
+		    content: {
+				id: id
+			},		    
+		    // The error handler
+		    error: function(error, ioArgs) {
+		        alert(error.message);
+		    }
+		});
+	
+	
+	
+}
+
+</script>
+
+
+</head>
+<body>
+
+<button type="button" id="hideButton">Hide the node! </button>
+<button type="button" id="showButton">Show the node! </button>
+<div id="basicNode" style="width: 200px; background-color: red;">
+  <b>This is a container of random content to toggle!</b>
+</div>
+
+
+<p align="center" role="navigation"><b>BASIC INFO</b></p>
+<div id='gridDiv' align="center" role="main" ></div>
+
+<p align="center" role="region" aria-label="operation buttons">
+  <span data-dojo-id='button2' data-dojo-type='dijit.form.Button'>
+      Add One Row
+  </span>
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <span data-dojo-id='button1' data-dojo-type='dijit.form.Button'>
+      Remove Selected Rows
+  </span>
+</p>
+</body>
+</html>
